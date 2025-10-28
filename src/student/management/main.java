@@ -3,7 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package student.management;
-import java.awt.CardLayout;
+import java.awt.*;
+import java.sql.*;
+import java.util.*;
+import javax.swing.*;
+import javax.swing.table.*;
 /**
  *
  * @author agampreetsingh
@@ -11,13 +15,16 @@ import java.awt.CardLayout;
 public class main extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(main.class.getName());
-
-    /**
-     * Creates new form main
-     */
+    private TableRowSorter<DefaultTableModel> sorter;
+    
     public main() {
         initComponents();
+        setupTableSorter();
+        loadStudentData();
     }
+    
+    String[] columnNames = {"Class", "Roll No", "First Name", "Last Name", "Date of Birth", "Gender"};
+    DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,6 +39,14 @@ public class main extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         panelOne = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        searchLabel = new javax.swing.JLabel();
+        searchField = new javax.swing.JTextField();
+        filterLabel = new javax.swing.JLabel();
+        filterCombo = new javax.swing.JComboBox<>();
+        clearButton = new javax.swing.JButton();
         panelTwo = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         panelThree = new javax.swing.JPanel();
@@ -55,21 +70,96 @@ public class main extends javax.swing.JFrame {
         jLabel1.setText("All Students");
         jLabel1.setAlignmentY(0.0F);
 
+        jTable1.setModel(tableModel);
+        jScrollPane1.setViewportView(jTable1);
+
+        searchLabel.setText("Search:");
+
+        searchField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchFieldActionPerformed(evt);
+            }
+        });
+        searchField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchFieldKeyReleased(evt);
+            }
+        });
+
+        filterLabel.setText("Class");
+
+        filterCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "11", "12" }));
+        filterCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterComboActionPerformed(evt);
+            }
+        });
+
+        clearButton.setText("Clear");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(searchLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 357, Short.MAX_VALUE)
+                .addComponent(filterLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(filterCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(163, 163, 163)
+                .addComponent(clearButton)
+                .addGap(20, 20, 20))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchLabel)
+                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filterLabel)
+                    .addComponent(filterCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clearButton))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout panelOneLayout = new javax.swing.GroupLayout(panelOne);
         panelOne.setLayout(panelOneLayout);
         panelOneLayout.setHorizontalGroup(
             panelOneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelOneLayout.createSequentialGroup()
-                .addGap(392, 392, 392)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(422, 422, 422))
+                .addGap(15, 15, 15)
+                .addGroup(panelOneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelOneLayout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panelOneLayout.createSequentialGroup()
+                        .addGap(379, 379, 379)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(420, 420, 420))
+                    .addGroup(panelOneLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 885, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         panelOneLayout.setVerticalGroup(
             panelOneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelOneLayout.createSequentialGroup()
-                .addGap(188, 188, 188)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(275, 275, 275))
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                .addGap(3, 3, 3)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         mainPanel.add(panelOne, "panelOne");
@@ -214,6 +304,24 @@ public class main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jbtPanelThree1ActionPerformed
 
+    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchFieldActionPerformed
+
+    private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
+        performFilter();
+    }//GEN-LAST:event_searchFieldKeyReleased
+
+    private void filterComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterComboActionPerformed
+        performFilter();
+    }//GEN-LAST:event_filterComboActionPerformed
+
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        searchField.setText("");
+        filterCombo.setSelectedIndex(0);
+        sorter.setRowFilter(null);
+    }//GEN-LAST:event_clearButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -238,11 +346,89 @@ public class main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new main().setVisible(true));
     }
+    
+    private void setupTableSorter() {
+        sorter = new TableRowSorter<>(tableModel);
+        jTable1.setRowSorter(sorter);
+    }
+    
+    private void performFilter() {
+        String searchText = searchField.getText().trim();
+        String selectedClass = (String) filterCombo.getSelectedItem();
+        
+        java.util.List<RowFilter<Object, Object>> filters = new ArrayList<>();
+        
+        // Add search filter if text is entered
+        if (searchText.length() > 0) {
+            try {
+                filters.add(RowFilter.regexFilter("(?i)" + searchText));
+            } catch (java.util.regex.PatternSyntaxException e) {
+                // Invalid regex, ignore
+            }
+        }
+        
+        // Add class filter if not "All"
+        if (!"All".equals(selectedClass)) {
+            filters.add(RowFilter.regexFilter("^" + selectedClass + "$", 0)); // 0 is the Class column index
+        }
+        
+        // Combine filters
+        if (filters.isEmpty()) {
+            sorter.setRowFilter(null);
+        } else if (filters.size() == 1) {
+            sorter.setRowFilter(filters.get(0));
+        } else {
+            sorter.setRowFilter(RowFilter.andFilter(filters));
+        }
+    }
+   
+    
+    private void loadStudentData() {
+        Connection conn = null;
+        try {            
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/students", "root", "verysecure"
+            );
+            Statement stmt = conn.createStatement();
+            String query = "Select * from student";
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                String classno = rs.getString("class");
+                String rollNo = rs.getString("roll_no");
+                String fname = rs.getString("first_name");
+                String lname = rs.getString("last_name");
+                String dob = rs.getString("date_of_birth");
+                String gender = rs.getString("gender");
+
+                String[] data = { classno, rollNo, fname, lname, dob, gender };            
+                tableModel.addRow(data);
+            }
+
+            rs.close();
+            stmt.close();
+            conn.close();
+
+        } catch (Exception e) {
+            logger.log(java.util.logging.Level.SEVERE, "Error loading student data", e);
+            JOptionPane.showMessageDialog(this, 
+                "Error loading student data: " + e.getMessage(), 
+                "Database Error", 
+                JOptionPane.ERROR_MESSAGE);
+    }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton clearButton;
+    private javax.swing.JComboBox<String> filterCombo;
+    private javax.swing.JLabel filterLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JButton jbtPanelOne;
     private javax.swing.JButton jbtPanelThree;
     private javax.swing.JButton jbtPanelThree1;
@@ -251,6 +437,8 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JPanel panelOne;
     private javax.swing.JPanel panelThree;
     private javax.swing.JPanel panelTwo;
+    private javax.swing.JTextField searchField;
+    private javax.swing.JLabel searchLabel;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables
 }

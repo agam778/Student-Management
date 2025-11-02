@@ -43,7 +43,6 @@ public class main extends javax.swing.JFrame {
         title = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
         panelStudents = new javax.swing.JPanel();
-        allLabel = new javax.swing.JLabel();
         scrollPane = new javax.swing.JScrollPane();
         studentsTable = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
@@ -52,6 +51,7 @@ public class main extends javax.swing.JFrame {
         filterLabel = new javax.swing.JLabel();
         filterCombo = new javax.swing.JComboBox<>();
         clearButton = new javax.swing.JButton();
+        allLabel = new javax.swing.JLabel();
         panelAddDel = new javax.swing.JPanel();
         addStudentLabel = new javax.swing.JLabel();
         classLabel = new javax.swing.JLabel();
@@ -74,8 +74,12 @@ public class main extends javax.swing.JFrame {
         addButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         addDelLabel = new javax.swing.JLabel();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        jSeparator2 = new javax.swing.JSeparator();
+        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         panelEdit = new javax.swing.JPanel();
-        editClassLabel = new javax.swing.JLabel();
         editRollNoLabel = new javax.swing.JLabel();
         editFnameLabel = new javax.swing.JLabel();
         editLnameLabel = new javax.swing.JLabel();
@@ -89,6 +93,9 @@ public class main extends javax.swing.JFrame {
         editClassCombo = new javax.swing.JComboBox<>();
         updateButton = new javax.swing.JButton();
         editLabel = new javax.swing.JLabel();
+        editClassLabel1 = new javax.swing.JLabel();
+        requiredLabel2 = new javax.swing.JLabel();
+        requiredLabel1 = new javax.swing.JLabel();
         jbtPanelStudents = new javax.swing.JButton();
         jbtPanelAddDel = new javax.swing.JButton();
         jbtPanelEdit = new javax.swing.JButton();
@@ -102,25 +109,28 @@ public class main extends javax.swing.JFrame {
 
         mainPanel.setLayout(new java.awt.CardLayout());
 
-        allLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
-        allLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        allLabel.setText("All Students");
-        allLabel.setAlignmentY(0.0F);
+        panelStudents.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         studentsTable.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         studentsTable.setModel(tableModel);
         scrollPane.setViewportView(studentsTable);
 
+        panelStudents.add(scrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 135, 899, 365));
+
+        searchLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         searchLabel.setText("Search:");
 
+        searchField.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         searchField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 searchFieldKeyReleased(evt);
             }
         });
 
+        filterLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         filterLabel.setText("Class");
 
+        filterCombo.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         filterCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "11", "12" }));
         filterCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,6 +138,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        clearButton.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         clearButton.setText("Clear");
         clearButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,17 +152,20 @@ public class main extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(filterLabel)
+                .addComponent(filterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(filterCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(searchLabel)
+                .addComponent(searchLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(clearButton)
                 .addContainerGap())
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {clearButton, filterCombo});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -167,55 +181,77 @@ public class main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout panelStudentsLayout = new javax.swing.GroupLayout(panelStudents);
-        panelStudents.setLayout(panelStudentsLayout);
-        panelStudentsLayout.setHorizontalGroup(
-            panelStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelStudentsLayout.createSequentialGroup()
-                .addGroup(panelStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(allLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(scrollPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 884, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        panelStudentsLayout.setVerticalGroup(
-            panelStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelStudentsLayout.createSequentialGroup()
-                .addComponent(allLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
-                .addGap(3, 3, 3)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {clearButton, filterCombo, filterLabel, searchField, searchLabel});
+
+        panelStudents.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 87, 899, -1));
+
+        allLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
+        allLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        allLabel.setText("All Students");
+        allLabel.setAlignmentY(0.0F);
+        panelStudents.add(allLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 893, 81));
 
         mainPanel.add(panelStudents, "panelStudents");
 
+        addStudentLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
         addStudentLabel.setText("Add Student:");
 
+        classLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         classLabel.setText("Class:");
 
+        rollNoLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         rollNoLabel.setText("Roll No.:");
 
+        fnameLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         fnameLabel.setText("First Name:");
 
+        lnameLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         lnameLabel.setText("Last Name:");
 
-        dobLabel.setText("Date of Birth");
+        dobLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        dobLabel.setText("DOB (YYYY-MM-DD)");
 
+        genderLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         genderLabel.setText("Gender");
 
+        deleteStudentLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
         deleteStudentLabel.setText("Delete Student");
 
+        deleteClassLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         deleteClassLabel.setText("Class");
 
+        deleteRollNoLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         deleteRollNoLabel.setText("Roll No.");
 
+        rollNoField.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        rollNoField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rollNoFieldActionPerformed(evt);
+            }
+        });
+
+        fnameField.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+
+        dobField.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+
+        lnameField.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+
+        deleteRollNoField.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        deleteRollNoField.setAlignmentX(0.0F);
+        deleteRollNoField.setAlignmentY(0.0F);
+
+        classComboAdd.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         classComboAdd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "11", "12" }));
 
+        genderCombo.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         genderCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
 
+        classComboDelete.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         classComboDelete.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "11", "12" }));
+        classComboDelete.setAlignmentX(0.0F);
+        classComboDelete.setAlignmentY(0.0F);
 
+        addButton.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         addButton.setText("Add Student");
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,6 +259,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        deleteButton.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         deleteButton.setText("Delete Student");
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,119 +277,159 @@ public class main extends javax.swing.JFrame {
         panelAddDelLayout.setHorizontalGroup(
             panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAddDelLayout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addGap(110, 110, 110)
                 .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addStudentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelAddDelLayout.createSequentialGroup()
-                        .addComponent(deleteRollNoLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteRollNoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(deleteStudentLabel)
+                        .addComponent(classLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(classComboAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelAddDelLayout.createSequentialGroup()
-                        .addComponent(genderLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(rollNoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(rollNoField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelAddDelLayout.createSequentialGroup()
-                        .addComponent(dobLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(dobField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(fnameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(fnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelAddDelLayout.createSequentialGroup()
-                        .addComponent(lnameLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lnameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(lnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dobLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelAddDelLayout.createSequentialGroup()
-                        .addComponent(rollNoLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rollNoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(genderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelAddDelLayout.createSequentialGroup()
-                        .addComponent(classLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(classComboAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(addStudentLabel)
-                    .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(panelAddDelLayout.createSequentialGroup()
-                            .addComponent(deleteClassLabel)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(classComboDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(deleteButton))
-                        .addGroup(panelAddDelLayout.createSequentialGroup()
-                            .addComponent(fnameLabel)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(fnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(64, 64, 64)
-                            .addComponent(addButton))))
-                .addContainerGap(504, Short.MAX_VALUE))
-            .addComponent(addDelLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(80, 80, 80)
+                        .addComponent(addButton)))
+                .addGap(30, 30, 30)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(deleteStudentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelAddDelLayout.createSequentialGroup()
+                        .addComponent(deleteClassLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(classComboDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(deleteRollNoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelAddDelLayout.createSequentialGroup()
+                        .addGap(206, 206, 206)
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelAddDelLayout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(deleteButton)))
+                .addGap(71, 71, 71)
+                .addComponent(filler3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelAddDelLayout.createSequentialGroup()
+                .addGap(300, 300, 300)
+                .addComponent(dobField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelAddDelLayout.createSequentialGroup()
+                .addGap(680, 680, 680)
+                .addComponent(deleteRollNoField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(addDelLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 893, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         panelAddDelLayout.setVerticalGroup(
             panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelAddDelLayout.createSequentialGroup()
-                .addComponent(addDelLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addStudentLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(classLabel)
-                    .addComponent(classComboAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rollNoLabel)
-                    .addComponent(rollNoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fnameLabel)
-                    .addComponent(fnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lnameLabel)
-                    .addComponent(lnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dobLabel)
-                    .addComponent(dobField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(genderLabel)
-                    .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(deleteStudentLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(deleteClassLabel)
-                    .addComponent(classComboDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleteButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(deleteRollNoLabel)
-                    .addComponent(deleteRollNoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addGap(80, 80, 80)
+                .addComponent(addStudentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(classLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(classComboAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rollNoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rollNoField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(fnameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lnameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addComponent(dobLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(genderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelAddDelLayout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelAddDelLayout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(deleteStudentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(deleteClassLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(classComboDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addComponent(deleteRollNoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(180, 180, 180)
+                .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelAddDelLayout.createSequentialGroup()
+                .addGap(250, 250, 250)
+                .addComponent(filler3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelAddDelLayout.createSequentialGroup()
+                .addGap(330, 330, 330)
+                .addComponent(dobField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelAddDelLayout.createSequentialGroup()
+                .addGap(180, 180, 180)
+                .addComponent(deleteRollNoField, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(addDelLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         mainPanel.add(panelAddDel, "panelAddDel");
 
-        editClassLabel.setText("Class");
-
+        editRollNoLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         editRollNoLabel.setText("Roll no.");
 
+        editFnameLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         editFnameLabel.setText("First Name");
 
+        editLnameLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         editLnameLabel.setText("Last Name");
 
-        editDobLabel.setText("Date of Birth");
+        editDobLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        editDobLabel.setText("DOB (YYYY-MM-DD)");
 
+        editGenderLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         editGenderLabel.setText("Gender");
 
+        editRollNoField.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         editRollNoField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editRollNoFieldActionPerformed(evt);
             }
         });
 
+        editFnameField.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+
+        editLnameField.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        editLnameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editLnameFieldActionPerformed(evt);
+            }
+        });
+
+        editDobField.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        editDobField.setToolTipText("");
+
+        editGenderCombo.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         editGenderCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
 
+        editClassCombo.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         editClassCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "11", "12" }));
 
+        updateButton.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         updateButton.setText("Update Student");
         updateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -362,86 +439,93 @@ public class main extends javax.swing.JFrame {
 
         editLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
         editLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        editLabel.setText("Edit Students");
+        editLabel.setText("Edit Student");
         editLabel.setAlignmentY(0.0F);
+
+        editClassLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        editClassLabel1.setText("Class");
+
+        requiredLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        requiredLabel2.setText("(Required)");
+
+        requiredLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        requiredLabel1.setText("(Required)");
 
         javax.swing.GroupLayout panelEditLayout = new javax.swing.GroupLayout(panelEdit);
         panelEdit.setLayout(panelEditLayout);
         panelEditLayout.setHorizontalGroup(
             panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(editLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 893, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(panelEditLayout.createSequentialGroup()
-                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelEditLayout.createSequentialGroup()
-                        .addGap(133, 133, 133)
-                        .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelEditLayout.createSequentialGroup()
-                                .addComponent(editClassLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(editClassCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(panelEditLayout.createSequentialGroup()
-                                    .addComponent(editFnameLabel)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(editFnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(panelEditLayout.createSequentialGroup()
-                                    .addComponent(editRollNoLabel)
-                                    .addGap(56, 56, 56)
-                                    .addComponent(editRollNoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(panelEditLayout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelEditLayout.createSequentialGroup()
-                                .addComponent(editGenderLabel)
-                                .addGap(35, 35, 35)
-                                .addComponent(editGenderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(panelEditLayout.createSequentialGroup()
-                                    .addComponent(editLnameLabel)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(editLnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(panelEditLayout.createSequentialGroup()
-                                    .addGap(6, 6, 6)
-                                    .addComponent(editDobLabel)
-                                    .addGap(33, 33, 33)
-                                    .addComponent(editDobField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(panelEditLayout.createSequentialGroup()
-                        .addGap(290, 290, 290)
-                        .addComponent(updateButton)))
-                .addContainerGap(468, Short.MAX_VALUE))
-            .addComponent(editLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(150, 150, 150)
+                .addComponent(requiredLabel1)
+                .addGap(17, 17, 17)
+                .addComponent(editClassLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(160, 160, 160)
+                .addComponent(editClassCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelEditLayout.createSequentialGroup()
+                .addGap(150, 150, 150)
+                .addComponent(requiredLabel2)
+                .addGap(17, 17, 17)
+                .addComponent(editRollNoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(160, 160, 160)
+                .addComponent(editRollNoField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelEditLayout.createSequentialGroup()
+                .addGap(240, 240, 240)
+                .addComponent(editFnameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(160, 160, 160)
+                .addComponent(editFnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelEditLayout.createSequentialGroup()
+                .addGap(240, 240, 240)
+                .addComponent(editLnameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(160, 160, 160)
+                .addComponent(editLnameField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelEditLayout.createSequentialGroup()
+                .addGap(240, 240, 240)
+                .addComponent(editDobLabel)
+                .addGap(132, 132, 132)
+                .addComponent(editDobField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelEditLayout.createSequentialGroup()
+                .addGap(240, 240, 240)
+                .addComponent(editGenderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(160, 160, 160)
+                .addComponent(editGenderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelEditLayout.createSequentialGroup()
+                .addGap(360, 360, 360)
+                .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panelEditLayout.setVerticalGroup(
             panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEditLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(editLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(33, 33, 33)
-                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editClassLabel)
+                .addComponent(editLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(requiredLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editClassLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editClassCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editRollNoLabel)
+                .addGap(20, 20, 20)
+                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(requiredLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editRollNoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editRollNoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editFnameLabel)
+                .addGap(20, 20, 20)
+                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(editFnameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editFnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editLnameLabel)
+                .addGap(20, 20, 20)
+                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(editLnameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editLnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editDobLabel)
+                .addGap(20, 20, 20)
+                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(editDobLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editDobField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editGenderLabel)
+                .addGap(20, 20, 20)
+                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(editGenderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(editGenderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addComponent(updateButton)
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addGap(50, 50, 50)
+                .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         mainPanel.add(panelEdit, "panelEdit");
@@ -538,46 +622,6 @@ public class main extends javax.swing.JFrame {
         performFilter();
     }//GEN-LAST:event_searchFieldKeyReleased
 
-    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        String classNo = (String) classComboAdd.getSelectedItem();
-        String rollNo = rollNoField.getText().trim();
-        String fname = fnameField.getText().trim();
-        String lname = lnameField.getText().trim();
-        String dob = dobField.getText().trim();
-        String gender = (String) genderCombo.getSelectedItem();
-
-        if (rollNo.isEmpty() || fname.isEmpty() || lname.isEmpty() || dob.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please fill all fields!", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (!dob.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            JOptionPane.showMessageDialog(this, "Invalid date format! Use YYYY-MM-DD", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        addStudent(classNo, rollNo, fname, lname, dob, gender);
-
-        rollNoField.setText(""); fnameField.setText(""); lnameField.setText(""); dobField.setText("");
-        classComboAdd.setSelectedIndex(0); genderCombo.setSelectedIndex(0);
-    }//GEN-LAST:event_addButtonActionPerformed
-
-    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        String classNo = (String) classComboDelete.getSelectedItem();
-        String rollNo = deleteRollNoField.getText().trim();
-
-        if (rollNo.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter Roll No!", "Validation Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to delete student with Roll No " + rollNo + " from Class " + classNo + "?",
-                "Confirm Delete", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            deleteStudent(classNo, rollNo);
-            deleteRollNoField.setText("");
-        }
-    }//GEN-LAST:event_deleteButtonActionPerformed
-
     private void editRollNoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editRollNoFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_editRollNoFieldActionPerformed
@@ -614,6 +658,54 @@ public class main extends javax.swing.JFrame {
         editClassCombo.setSelectedIndex(0);
         editGenderCombo.setSelectedIndex(0);
     }//GEN-LAST:event_updateButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        String classNo = (String) classComboDelete.getSelectedItem();
+        String rollNo = deleteRollNoField.getText().trim();
+
+        if (rollNo.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter Roll No!", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to delete student with Roll No " + rollNo + " from Class " + classNo + "?",
+            "Confirm Delete", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+        deleteStudent(classNo, rollNo);
+        deleteRollNoField.setText("");
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        String classNo = (String) classComboAdd.getSelectedItem();
+        String rollNo = rollNoField.getText().trim();
+        String fname = fnameField.getText().trim();
+        String lname = lnameField.getText().trim();
+        String dob = dobField.getText().trim();
+        String gender = (String) genderCombo.getSelectedItem();
+
+        if (rollNo.isEmpty() || fname.isEmpty() || lname.isEmpty() || dob.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill all fields!", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!dob.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            JOptionPane.showMessageDialog(this, "Invalid date format! Use YYYY-MM-DD", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        addStudent(classNo, rollNo, fname, lname, dob, gender);
+
+        rollNoField.setText(""); fnameField.setText(""); lnameField.setText(""); dobField.setText("");
+        classComboAdd.setSelectedIndex(0); genderCombo.setSelectedIndex(0);
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void rollNoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollNoFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rollNoFieldActionPerformed
+
+    private void editLnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editLnameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editLnameFieldActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> new main().setVisible(true));
@@ -835,7 +927,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTextField dobField;
     private javax.swing.JLabel dobLabel;
     private javax.swing.JComboBox<String> editClassCombo;
-    private javax.swing.JLabel editClassLabel;
+    private javax.swing.JLabel editClassLabel1;
     private javax.swing.JTextField editDobField;
     private javax.swing.JLabel editDobLabel;
     private javax.swing.JTextField editFnameField;
@@ -847,6 +939,10 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel editLnameLabel;
     private javax.swing.JTextField editRollNoField;
     private javax.swing.JLabel editRollNoLabel;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
+    private javax.swing.Box.Filler filler3;
+    private javax.swing.Box.Filler filler4;
     private javax.swing.JComboBox<String> filterCombo;
     private javax.swing.JLabel filterLabel;
     private javax.swing.JTextField fnameField;
@@ -854,6 +950,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> genderCombo;
     private javax.swing.JLabel genderLabel;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton jbtPanelAddDel;
     private javax.swing.JButton jbtPanelEdit;
     private javax.swing.JButton jbtPanelStudents;
@@ -863,6 +960,8 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JPanel panelAddDel;
     private javax.swing.JPanel panelEdit;
     private javax.swing.JPanel panelStudents;
+    private javax.swing.JLabel requiredLabel1;
+    private javax.swing.JLabel requiredLabel2;
     private javax.swing.JTextField rollNoField;
     private javax.swing.JLabel rollNoLabel;
     private javax.swing.JScrollPane scrollPane;

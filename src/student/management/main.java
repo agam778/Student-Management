@@ -24,7 +24,12 @@ public class main extends javax.swing.JFrame {
     }
     
     String[] columnNames = {"Class", "Roll No", "First Name", "Last Name", "Date of Birth", "Gender"};
-    DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+    DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+           return false;
+        }
+    };
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,24 +42,56 @@ public class main extends javax.swing.JFrame {
 
         title = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
-        panelOne = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        panelStudents = new javax.swing.JPanel();
+        allLabel = new javax.swing.JLabel();
+        scrollPane = new javax.swing.JScrollPane();
+        studentsTable = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         searchLabel = new javax.swing.JLabel();
         searchField = new javax.swing.JTextField();
         filterLabel = new javax.swing.JLabel();
         filterCombo = new javax.swing.JComboBox<>();
         clearButton = new javax.swing.JButton();
-        panelTwo = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        panelThree = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jbtPanelOne = new javax.swing.JButton();
-        jbtPanelTwo = new javax.swing.JButton();
-        jbtPanelThree = new javax.swing.JButton();
-        jbtPanelThree1 = new javax.swing.JButton();
+        panelAddDel = new javax.swing.JPanel();
+        addStudentLabel = new javax.swing.JLabel();
+        classLabel = new javax.swing.JLabel();
+        rollNoLabel = new javax.swing.JLabel();
+        fnameLabel = new javax.swing.JLabel();
+        lnameLabel = new javax.swing.JLabel();
+        dobLabel = new javax.swing.JLabel();
+        genderLabel = new javax.swing.JLabel();
+        deleteStudentLabel = new javax.swing.JLabel();
+        deleteClassLabel = new javax.swing.JLabel();
+        deleteRollNoLabel = new javax.swing.JLabel();
+        rollNoField = new javax.swing.JTextField();
+        fnameField = new javax.swing.JTextField();
+        dobField = new javax.swing.JTextField();
+        lnameField = new javax.swing.JTextField();
+        deleteRollNoField = new javax.swing.JTextField();
+        classComboAdd = new javax.swing.JComboBox<>();
+        genderCombo = new javax.swing.JComboBox<>();
+        classComboDelete = new javax.swing.JComboBox<>();
+        addButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
+        addDelLabel = new javax.swing.JLabel();
+        panelEdit = new javax.swing.JPanel();
+        editClassLabel = new javax.swing.JLabel();
+        editRollNoLabel = new javax.swing.JLabel();
+        editFnameLabel = new javax.swing.JLabel();
+        editLnameLabel = new javax.swing.JLabel();
+        editDobLabel = new javax.swing.JLabel();
+        editGenderLabel = new javax.swing.JLabel();
+        editRollNoField = new javax.swing.JTextField();
+        editFnameField = new javax.swing.JTextField();
+        editLnameField = new javax.swing.JTextField();
+        editDobField = new javax.swing.JTextField();
+        editGenderCombo = new javax.swing.JComboBox<>();
+        editClassCombo = new javax.swing.JComboBox<>();
+        updateButton = new javax.swing.JButton();
+        editLabel = new javax.swing.JLabel();
+        jbtPanelStudents = new javax.swing.JButton();
+        jbtPanelAddDel = new javax.swing.JButton();
+        jbtPanelEdit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,21 +102,17 @@ public class main extends javax.swing.JFrame {
 
         mainPanel.setLayout(new java.awt.CardLayout());
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("All Students");
-        jLabel1.setAlignmentY(0.0F);
+        allLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
+        allLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        allLabel.setText("All Students");
+        allLabel.setAlignmentY(0.0F);
 
-        jTable1.setModel(tableModel);
-        jScrollPane1.setViewportView(jTable1);
+        studentsTable.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        studentsTable.setModel(tableModel);
+        scrollPane.setViewportView(studentsTable);
 
         searchLabel.setText("Search:");
 
-        searchField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchFieldActionPerformed(evt);
-            }
-        });
         searchField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 searchFieldKeyReleased(evt);
@@ -108,139 +141,332 @@ public class main extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(searchLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 357, Short.MAX_VALUE)
                 .addComponent(filterLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(filterCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(163, 163, 163)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(searchLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(clearButton)
-                .addGap(20, 20, 20))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchLabel)
-                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filterLabel)
-                    .addComponent(filterCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(clearButton))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(filterLabel)
+                        .addComponent(filterCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(searchLabel)
+                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(clearButton)))
+                .addContainerGap())
         );
 
-        javax.swing.GroupLayout panelOneLayout = new javax.swing.GroupLayout(panelOne);
-        panelOne.setLayout(panelOneLayout);
-        panelOneLayout.setHorizontalGroup(
-            panelOneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelOneLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(panelOneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelOneLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(panelOneLayout.createSequentialGroup()
-                        .addGap(379, 379, 379)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(420, 420, 420))
-                    .addGroup(panelOneLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 885, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        javax.swing.GroupLayout panelStudentsLayout = new javax.swing.GroupLayout(panelStudents);
+        panelStudents.setLayout(panelStudentsLayout);
+        panelStudentsLayout.setHorizontalGroup(
+            panelStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelStudentsLayout.createSequentialGroup()
+                .addGroup(panelStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(allLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(scrollPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 884, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-        panelOneLayout.setVerticalGroup(
-            panelOneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelOneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+        panelStudentsLayout.setVerticalGroup(
+            panelStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelStudentsLayout.createSequentialGroup()
+                .addComponent(allLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
                 .addGap(3, 3, 3)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        mainPanel.add(panelOne, "panelOne");
+        mainPanel.add(panelStudents, "panelStudents");
 
-        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Fuck students");
-        jLabel2.setAlignmentY(0.0F);
+        addStudentLabel.setText("Add Student:");
 
-        javax.swing.GroupLayout panelTwoLayout = new javax.swing.GroupLayout(panelTwo);
-        panelTwo.setLayout(panelTwoLayout);
-        panelTwoLayout.setHorizontalGroup(
-            panelTwoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelTwoLayout.createSequentialGroup()
-                .addGap(392, 392, 392)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(422, 422, 422))
-        );
-        panelTwoLayout.setVerticalGroup(
-            panelTwoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelTwoLayout.createSequentialGroup()
-                .addGap(188, 188, 188)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(275, 275, 275))
-        );
+        classLabel.setText("Class:");
 
-        mainPanel.add(panelTwo, "panelTwo");
+        rollNoLabel.setText("Roll No.:");
 
-        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Whos'a good boy?");
-        jLabel3.setAlignmentY(0.0F);
+        fnameLabel.setText("First Name:");
 
-        javax.swing.GroupLayout panelThreeLayout = new javax.swing.GroupLayout(panelThree);
-        panelThree.setLayout(panelThreeLayout);
-        panelThreeLayout.setHorizontalGroup(
-            panelThreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelThreeLayout.createSequentialGroup()
-                .addGap(353, 353, 353)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(362, 362, 362))
-        );
-        panelThreeLayout.setVerticalGroup(
-            panelThreeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelThreeLayout.createSequentialGroup()
-                .addGap(182, 182, 182)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(274, 274, 274))
-        );
+        lnameLabel.setText("Last Name:");
 
-        mainPanel.add(panelThree, "panelThree");
+        dobLabel.setText("Date of Birth");
 
-        jbtPanelOne.setText("View all Students");
-        jbtPanelOne.setAlignmentY(0.0F);
-        jbtPanelOne.addActionListener(new java.awt.event.ActionListener() {
+        genderLabel.setText("Gender");
+
+        deleteStudentLabel.setText("Delete Student");
+
+        deleteClassLabel.setText("Class");
+
+        deleteRollNoLabel.setText("Roll No.");
+
+        classComboAdd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "11", "12" }));
+
+        genderCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
+
+        classComboDelete.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "11", "12" }));
+
+        addButton.setText("Add Student");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtPanelOneActionPerformed(evt);
+                addButtonActionPerformed(evt);
             }
         });
 
-        jbtPanelTwo.setText("Add/Delete Student");
-        jbtPanelTwo.setAlignmentY(0.0F);
-        jbtPanelTwo.addActionListener(new java.awt.event.ActionListener() {
+        deleteButton.setText("Delete Student");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtPanelTwoActionPerformed(evt);
+                deleteButtonActionPerformed(evt);
             }
         });
 
-        jbtPanelThree.setText("Edit Student");
-        jbtPanelThree.setAlignmentY(0.0F);
-        jbtPanelThree.addActionListener(new java.awt.event.ActionListener() {
+        addDelLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
+        addDelLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        addDelLabel.setText("Add/Delete Students");
+        addDelLabel.setAlignmentY(0.0F);
+
+        javax.swing.GroupLayout panelAddDelLayout = new javax.swing.GroupLayout(panelAddDel);
+        panelAddDel.setLayout(panelAddDelLayout);
+        panelAddDelLayout.setHorizontalGroup(
+            panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAddDelLayout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelAddDelLayout.createSequentialGroup()
+                        .addComponent(deleteRollNoLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteRollNoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(deleteStudentLabel)
+                    .addGroup(panelAddDelLayout.createSequentialGroup()
+                        .addComponent(genderLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelAddDelLayout.createSequentialGroup()
+                        .addComponent(dobLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(dobField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelAddDelLayout.createSequentialGroup()
+                        .addComponent(lnameLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelAddDelLayout.createSequentialGroup()
+                        .addComponent(rollNoLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rollNoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelAddDelLayout.createSequentialGroup()
+                        .addComponent(classLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(classComboAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addStudentLabel)
+                    .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(panelAddDelLayout.createSequentialGroup()
+                            .addComponent(deleteClassLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(classComboDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(deleteButton))
+                        .addGroup(panelAddDelLayout.createSequentialGroup()
+                            .addComponent(fnameLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(fnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(64, 64, 64)
+                            .addComponent(addButton))))
+                .addContainerGap(504, Short.MAX_VALUE))
+            .addComponent(addDelLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        panelAddDelLayout.setVerticalGroup(
+            panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAddDelLayout.createSequentialGroup()
+                .addComponent(addDelLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addStudentLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(classLabel)
+                    .addComponent(classComboAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rollNoLabel)
+                    .addComponent(rollNoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fnameLabel)
+                    .addComponent(fnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lnameLabel)
+                    .addComponent(lnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dobLabel)
+                    .addComponent(dobField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(genderLabel)
+                    .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addComponent(deleteStudentLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deleteClassLabel)
+                    .addComponent(classComboDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelAddDelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deleteRollNoLabel)
+                    .addComponent(deleteRollNoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(66, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(panelAddDel, "panelAddDel");
+
+        editClassLabel.setText("Class");
+
+        editRollNoLabel.setText("Roll no.");
+
+        editFnameLabel.setText("First Name");
+
+        editLnameLabel.setText("Last Name");
+
+        editDobLabel.setText("Date of Birth");
+
+        editGenderLabel.setText("Gender");
+
+        editRollNoField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtPanelThreeActionPerformed(evt);
+                editRollNoFieldActionPerformed(evt);
             }
         });
 
-        jbtPanelThree1.setText("Export");
-        jbtPanelThree1.setAlignmentY(0.0F);
-        jbtPanelThree1.addActionListener(new java.awt.event.ActionListener() {
+        editGenderCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
+
+        editClassCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "11", "12" }));
+
+        updateButton.setText("Update Student");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtPanelThree1ActionPerformed(evt);
+                updateButtonActionPerformed(evt);
+            }
+        });
+
+        editLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
+        editLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        editLabel.setText("Edit Students");
+        editLabel.setAlignmentY(0.0F);
+
+        javax.swing.GroupLayout panelEditLayout = new javax.swing.GroupLayout(panelEdit);
+        panelEdit.setLayout(panelEditLayout);
+        panelEditLayout.setHorizontalGroup(
+            panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEditLayout.createSequentialGroup()
+                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelEditLayout.createSequentialGroup()
+                        .addGap(133, 133, 133)
+                        .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelEditLayout.createSequentialGroup()
+                                .addComponent(editClassLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(editClassCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(panelEditLayout.createSequentialGroup()
+                                    .addComponent(editFnameLabel)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(editFnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(panelEditLayout.createSequentialGroup()
+                                    .addComponent(editRollNoLabel)
+                                    .addGap(56, 56, 56)
+                                    .addComponent(editRollNoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(panelEditLayout.createSequentialGroup()
+                        .addGap(130, 130, 130)
+                        .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelEditLayout.createSequentialGroup()
+                                .addComponent(editGenderLabel)
+                                .addGap(35, 35, 35)
+                                .addComponent(editGenderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(panelEditLayout.createSequentialGroup()
+                                    .addComponent(editLnameLabel)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(editLnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(panelEditLayout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addComponent(editDobLabel)
+                                    .addGap(33, 33, 33)
+                                    .addComponent(editDobField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(panelEditLayout.createSequentialGroup()
+                        .addGap(290, 290, 290)
+                        .addComponent(updateButton)))
+                .addContainerGap(468, Short.MAX_VALUE))
+            .addComponent(editLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        panelEditLayout.setVerticalGroup(
+            panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEditLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(editLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
+                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editClassLabel)
+                    .addComponent(editClassCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editRollNoLabel)
+                    .addComponent(editRollNoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editFnameLabel)
+                    .addComponent(editFnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editLnameLabel)
+                    .addComponent(editLnameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editDobLabel)
+                    .addComponent(editDobField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editGenderLabel)
+                    .addComponent(editGenderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(updateButton)
+                .addContainerGap(147, Short.MAX_VALUE))
+        );
+
+        mainPanel.add(panelEdit, "panelEdit");
+
+        jbtPanelStudents.setText("View all Students");
+        jbtPanelStudents.setAlignmentY(0.0F);
+        jbtPanelStudents.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtPanelStudentsActionPerformed(evt);
+            }
+        });
+
+        jbtPanelAddDel.setText("Add/Delete Student");
+        jbtPanelAddDel.setAlignmentY(0.0F);
+        jbtPanelAddDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtPanelAddDelActionPerformed(evt);
+            }
+        });
+
+        jbtPanelEdit.setText("Edit Student");
+        jbtPanelEdit.setAlignmentY(0.0F);
+        jbtPanelEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtPanelEditActionPerformed(evt);
             }
         });
 
@@ -256,13 +482,11 @@ public class main extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbtPanelOne, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbtPanelStudents, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtPanelTwo, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbtPanelAddDel, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtPanelThree, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtPanelThree1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jbtPanelEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 884, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -274,47 +498,31 @@ public class main extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtPanelThree, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtPanelThree1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtPanelOne, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtPanelTwo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbtPanelStudents, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbtPanelEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbtPanelAddDel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbtPanelOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPanelOneActionPerformed
+    private void jbtPanelStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPanelStudentsActionPerformed
        CardLayout card = (CardLayout)mainPanel.getLayout();
-       card.show(mainPanel, "panelOne");
-    }//GEN-LAST:event_jbtPanelOneActionPerformed
+       card.show(mainPanel, "panelStudents");
+    }//GEN-LAST:event_jbtPanelStudentsActionPerformed
 
-    private void jbtPanelTwoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPanelTwoActionPerformed
+    private void jbtPanelAddDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPanelAddDelActionPerformed
        CardLayout card = (CardLayout)mainPanel.getLayout();
-       card.show(mainPanel, "panelTwo");
-    }//GEN-LAST:event_jbtPanelTwoActionPerformed
+       card.show(mainPanel, "panelAddDel");
+    }//GEN-LAST:event_jbtPanelAddDelActionPerformed
 
-    private void jbtPanelThreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPanelThreeActionPerformed
+    private void jbtPanelEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPanelEditActionPerformed
        CardLayout card = (CardLayout)mainPanel.getLayout();
-       card.show(mainPanel, "panelThree");
-    }//GEN-LAST:event_jbtPanelThreeActionPerformed
-
-    private void jbtPanelThree1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtPanelThree1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbtPanelThree1ActionPerformed
-
-    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchFieldActionPerformed
-
-    private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
-        performFilter();
-    }//GEN-LAST:event_searchFieldKeyReleased
-
-    private void filterComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterComboActionPerformed
-        performFilter();
-    }//GEN-LAST:event_filterComboActionPerformed
+       card.show(mainPanel, "panelEdit");
+    }//GEN-LAST:event_jbtPanelEditActionPerformed
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         searchField.setText("");
@@ -322,123 +530,346 @@ public class main extends javax.swing.JFrame {
         sorter.setRowFilter(null);
     }//GEN-LAST:event_clearButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void filterComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterComboActionPerformed
+        performFilter();
+    }//GEN-LAST:event_filterComboActionPerformed
 
-        /* Create and display the form */
+    private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
+        performFilter();
+    }//GEN-LAST:event_searchFieldKeyReleased
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        String classNo = (String) classComboAdd.getSelectedItem();
+        String rollNo = rollNoField.getText().trim();
+        String fname = fnameField.getText().trim();
+        String lname = lnameField.getText().trim();
+        String dob = dobField.getText().trim();
+        String gender = (String) genderCombo.getSelectedItem();
+
+        if (rollNo.isEmpty() || fname.isEmpty() || lname.isEmpty() || dob.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill all fields!", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!dob.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            JOptionPane.showMessageDialog(this, "Invalid date format! Use YYYY-MM-DD", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        addStudent(classNo, rollNo, fname, lname, dob, gender);
+
+        rollNoField.setText(""); fnameField.setText(""); lnameField.setText(""); dobField.setText("");
+        classComboAdd.setSelectedIndex(0); genderCombo.setSelectedIndex(0);
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        String classNo = (String) classComboDelete.getSelectedItem();
+        String rollNo = deleteRollNoField.getText().trim();
+
+        if (rollNo.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter Roll No!", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to delete student with Roll No " + rollNo + " from Class " + classNo + "?",
+                "Confirm Delete", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            deleteStudent(classNo, rollNo);
+            deleteRollNoField.setText("");
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void editRollNoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editRollNoFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editRollNoFieldActionPerformed
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        String classNo = (String) editClassCombo.getSelectedItem();
+        String rollNo = editRollNoField.getText().trim();
+
+        // Class and Roll No are mandatory
+        if (rollNo.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Class and Roll No are required!", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Get values (can be empty)
+        String fname = editFnameField.getText().trim();
+        String lname = editLnameField.getText().trim();
+        String dob = editDobField.getText().trim();
+        String gender = (String) editGenderCombo.getSelectedItem();
+
+        // Validate date format if provided
+        if (!dob.isEmpty() && !dob.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            JOptionPane.showMessageDialog(this, "Invalid date format! Use YYYY-MM-DD", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        updateStudent(classNo, rollNo, fname, lname, dob, gender);
+
+        // Clear fields after update
+        editRollNoField.setText("");
+        editFnameField.setText("");
+        editLnameField.setText("");
+        editDobField.setText("");
+        editClassCombo.setSelectedIndex(0);
+        editGenderCombo.setSelectedIndex(0);
+    }//GEN-LAST:event_updateButtonActionPerformed
+
+    public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> new main().setVisible(true));
     }
     
     private void setupTableSorter() {
         sorter = new TableRowSorter<>(tableModel);
-        jTable1.setRowSorter(sorter);
+        studentsTable.setRowSorter(sorter);
     }
-    
+
     private void performFilter() {
         String searchText = searchField.getText().trim();
         String selectedClass = (String) filterCombo.getSelectedItem();
-        
+
         java.util.List<RowFilter<Object, Object>> filters = new ArrayList<>();
-        
-        // Add search filter if text is entered
-        if (searchText.length() > 0) {
+
+        if (!searchText.isEmpty()) {
             try {
                 filters.add(RowFilter.regexFilter("(?i)" + searchText));
-            } catch (java.util.regex.PatternSyntaxException e) {
-                // Invalid regex, ignore
-            }
+            } catch (java.util.regex.PatternSyntaxException ignored) {}
         }
-        
-        // Add class filter if not "All"
+
         if (!"All".equals(selectedClass)) {
-            filters.add(RowFilter.regexFilter("^" + selectedClass + "$", 0)); // 0 is the Class column index
+            filters.add(RowFilter.regexFilter("^" + selectedClass + "$", 0));
         }
-        
-        // Combine filters
-        if (filters.isEmpty()) {
-            sorter.setRowFilter(null);
-        } else if (filters.size() == 1) {
-            sorter.setRowFilter(filters.get(0));
-        } else {
-            sorter.setRowFilter(RowFilter.andFilter(filters));
-        }
+
+        sorter.setRowFilter(filters.isEmpty() ? null : filters.size() == 1 ? filters.get(0) : RowFilter.andFilter(filters));
     }
-   
     
     private void loadStudentData() {
-        Connection conn = null;
-        try {            
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/students", "root", "verysecure"
-            );
-            Statement stmt = conn.createStatement();
-            String query = "Select * from student";
-            ResultSet rs = stmt.executeQuery(query);
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/students", "root", "verysecure");
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM student")) {
 
             while (rs.next()) {
-                String classno = rs.getString("class");
-                String rollNo = rs.getString("roll_no");
-                String fname = rs.getString("first_name");
-                String lname = rs.getString("last_name");
-                String dob = rs.getString("date_of_birth");
-                String gender = rs.getString("gender");
-
-                String[] data = { classno, rollNo, fname, lname, dob, gender };            
-                tableModel.addRow(data);
+                tableModel.addRow(new String[]{
+                    rs.getString("class"),
+                    rs.getString("roll_no"),
+                    rs.getString("first_name"),
+                    rs.getString("last_name"),
+                    rs.getString("date_of_birth"),
+                    rs.getString("gender")
+                });
             }
-
-            rs.close();
-            stmt.close();
-            conn.close();
-
         } catch (Exception e) {
             logger.log(java.util.logging.Level.SEVERE, "Error loading student data", e);
             JOptionPane.showMessageDialog(this, 
                 "Error loading student data: " + e.getMessage(), 
                 "Database Error", 
                 JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void addStudent(String classNo, String rollNo, String fname, String lname, String dob, String gender) {
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/students", "root", "verysecure")) {
+            String checkQuery = "SELECT * FROM student WHERE class = ? AND roll_no = ?";
+            try (PreparedStatement checkStmt = conn.prepareStatement(checkQuery)) {
+                checkStmt.setString(1, classNo);
+                checkStmt.setString(2, rollNo);
+                try (ResultSet rs = checkStmt.executeQuery()) {
+                    if (rs.next()) {
+                        JOptionPane.showMessageDialog(this, 
+                            "Student with Roll No " + rollNo + " already exists in Class " + classNo + "!", 
+                            "Duplicate Entry", 
+                            JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                }
+            }
+
+            String insertQuery = "INSERT INTO student (class, roll_no, first_name, last_name, date_of_birth, gender) VALUES (?, ?, ?, ?, ?, ?)";
+            try (PreparedStatement insertStmt = conn.prepareStatement(insertQuery)) {
+                insertStmt.setString(1, classNo);
+                insertStmt.setString(2, rollNo);
+                insertStmt.setString(3, fname);
+                insertStmt.setString(4, lname);
+                insertStmt.setString(5, dob);
+                insertStmt.setString(6, gender);
+
+                int rowsInserted = insertStmt.executeUpdate();
+
+                if (rowsInserted > 0) {
+                    tableModel.addRow(new String[]{classNo, rollNo, fname, lname, dob, gender});
+                    JOptionPane.showMessageDialog(this, 
+                        "Student added successfully!", 
+                        "Success", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        } catch (Exception e) {
+            logger.log(java.util.logging.Level.SEVERE, "Error adding student", e);
+            JOptionPane.showMessageDialog(this, 
+                "Error adding student: " + e.getMessage(), 
+                "Database Error", 
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void deleteStudent(String classNo, String rollNo) {
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/students", "root", "verysecure")) {
+            String deleteQuery = "DELETE FROM student WHERE class = ? AND roll_no = ?";
+            try (PreparedStatement deleteStmt = conn.prepareStatement(deleteQuery)) {
+                deleteStmt.setString(1, classNo);
+                deleteStmt.setString(2, rollNo);
+
+                int rowsDeleted = deleteStmt.executeUpdate();
+
+                if (rowsDeleted > 0) {
+                    for (int i = 0; i < tableModel.getRowCount(); i++) {
+                        if (tableModel.getValueAt(i, 0).equals(classNo) && 
+                            tableModel.getValueAt(i, 1).equals(rollNo)) {
+                            tableModel.removeRow(i);
+                            break;
+                        }
+                    }
+                    JOptionPane.showMessageDialog(this, 
+                        "Student deleted successfully!", 
+                        "Success", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, 
+                        "Student not found!", 
+                        "Error", 
+                        JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (Exception e) {
+            logger.log(java.util.logging.Level.SEVERE, "Error deleting student", e);
+            JOptionPane.showMessageDialog(this, 
+                "Error deleting student: " + e.getMessage(), 
+                "Database Error", 
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void updateStudent(String classNo, String rollNo, String fname, String lname, String dob, String gender) {
+    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/students", "root", "verysecure")) {
+        // Check if student exists
+        String checkQuery = "SELECT * FROM student WHERE class = ? AND roll_no = ?";
+        try (PreparedStatement checkStmt = conn.prepareStatement(checkQuery)) {
+            checkStmt.setString(1, classNo);
+            checkStmt.setString(2, rollNo);
+            try (ResultSet rs = checkStmt.executeQuery()) {
+                if (!rs.next()) {
+                    JOptionPane.showMessageDialog(this, 
+                        "Student with Roll No " + rollNo + " not found in Class " + classNo + "!", 
+                        "Not Found", 
+                        JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+        }
+
+        // Build dynamic UPDATE query based on filled fields
+        java.util.List<String> updates = new ArrayList<>(), values = new ArrayList<>();
+        if (!fname.isEmpty()) { updates.add("first_name = ?"); values.add(fname); }
+        if (!lname.isEmpty()) { updates.add("last_name = ?"); values.add(lname); }
+        if (!dob.isEmpty()) { updates.add("date_of_birth = ?"); values.add(dob); }
+        if (gender != null && !gender.isEmpty()) { updates.add("gender = ?"); values.add(gender); }
+
+        if (updates.isEmpty()) {
+            JOptionPane.showMessageDialog(this, 
+                "Please fill at least one field to update!", 
+                "No Changes", 
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String updateQuery = "UPDATE student SET " + String.join(", ", updates) + " WHERE class = ? AND roll_no = ?";
+        try (PreparedStatement updateStmt = conn.prepareStatement(updateQuery)) {
+            int paramIndex = 1;
+            for (String value : values) updateStmt.setString(paramIndex++, value);
+            updateStmt.setString(paramIndex++, classNo);
+            updateStmt.setString(paramIndex, rollNo);
+
+            int rowsUpdated = updateStmt.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                // Update table model with new values
+                for (int i = 0; i < tableModel.getRowCount(); i++) {
+                    if (tableModel.getValueAt(i, 0).equals(classNo) && tableModel.getValueAt(i, 1).equals(rollNo)) {
+                        if (!fname.isEmpty()) tableModel.setValueAt(fname, i, 2);
+                        if (!lname.isEmpty()) tableModel.setValueAt(lname, i, 3);
+                        if (!dob.isEmpty()) tableModel.setValueAt(dob, i, 4);
+                        if (gender != null && !gender.isEmpty()) tableModel.setValueAt(gender, i, 5);
+                        break;
+                    }
+                }
+
+                JOptionPane.showMessageDialog(this, 
+                    "Student updated successfully!", 
+                    "Success", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    } catch (Exception e) {
+        logger.log(java.util.logging.Level.SEVERE, "Error updating student", e);
+        JOptionPane.showMessageDialog(this, 
+            "Error updating student: " + e.getMessage(), 
+            "Database Error", 
+            JOptionPane.ERROR_MESSAGE);
     }
 }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
+    private javax.swing.JLabel addDelLabel;
+    private javax.swing.JLabel addStudentLabel;
+    private javax.swing.JLabel allLabel;
+    private javax.swing.JComboBox<String> classComboAdd;
+    private javax.swing.JComboBox<String> classComboDelete;
+    private javax.swing.JLabel classLabel;
     private javax.swing.JButton clearButton;
+    private javax.swing.JButton deleteButton;
+    private javax.swing.JLabel deleteClassLabel;
+    private javax.swing.JTextField deleteRollNoField;
+    private javax.swing.JLabel deleteRollNoLabel;
+    private javax.swing.JLabel deleteStudentLabel;
+    private javax.swing.JTextField dobField;
+    private javax.swing.JLabel dobLabel;
+    private javax.swing.JComboBox<String> editClassCombo;
+    private javax.swing.JLabel editClassLabel;
+    private javax.swing.JTextField editDobField;
+    private javax.swing.JLabel editDobLabel;
+    private javax.swing.JTextField editFnameField;
+    private javax.swing.JLabel editFnameLabel;
+    private javax.swing.JComboBox<String> editGenderCombo;
+    private javax.swing.JLabel editGenderLabel;
+    private javax.swing.JLabel editLabel;
+    private javax.swing.JTextField editLnameField;
+    private javax.swing.JLabel editLnameLabel;
+    private javax.swing.JTextField editRollNoField;
+    private javax.swing.JLabel editRollNoLabel;
     private javax.swing.JComboBox<String> filterCombo;
     private javax.swing.JLabel filterLabel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField fnameField;
+    private javax.swing.JLabel fnameLabel;
+    private javax.swing.JComboBox<String> genderCombo;
+    private javax.swing.JLabel genderLabel;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JButton jbtPanelOne;
-    private javax.swing.JButton jbtPanelThree;
-    private javax.swing.JButton jbtPanelThree1;
-    private javax.swing.JButton jbtPanelTwo;
+    private javax.swing.JButton jbtPanelAddDel;
+    private javax.swing.JButton jbtPanelEdit;
+    private javax.swing.JButton jbtPanelStudents;
+    private javax.swing.JTextField lnameField;
+    private javax.swing.JLabel lnameLabel;
     private javax.swing.JPanel mainPanel;
-    private javax.swing.JPanel panelOne;
-    private javax.swing.JPanel panelThree;
-    private javax.swing.JPanel panelTwo;
+    private javax.swing.JPanel panelAddDel;
+    private javax.swing.JPanel panelEdit;
+    private javax.swing.JPanel panelStudents;
+    private javax.swing.JTextField rollNoField;
+    private javax.swing.JLabel rollNoLabel;
+    private javax.swing.JScrollPane scrollPane;
     private javax.swing.JTextField searchField;
     private javax.swing.JLabel searchLabel;
+    private javax.swing.JTable studentsTable;
     private javax.swing.JLabel title;
+    private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }
